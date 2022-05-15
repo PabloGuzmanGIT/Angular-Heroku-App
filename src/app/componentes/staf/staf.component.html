@@ -1,0 +1,42 @@
+<section id="proveedores" class="padded">
+  <div class="container">
+    <h2>Cocineros</h2>
+    <div class="mb-3">
+      <label class="form-label">Buscar Chef</label>
+      <input type="text" class="form-control" 
+        placeholder="Escriba el nombre de la empresa a buscar">
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th (click)="setOrder('ranking')" [class.active]="order==='ranking'">
+            <span [hidden]="reversa"><i class="bi bi-chevron-down"></i></span>
+            <span [hidden]="!reversa"><i class="bi bi-chevron-up"></i></span>
+            Ranking
+          </th>
+          <th (click)="setOrder('name')" [class.active]="order==='name'">
+            <span [hidden]="reversa"><i class="bi bi-chevron-down"></i></span>
+            <span [hidden]="!reversa"><i class="bi bi-chevron-up"></i></span>
+            Name
+          </th>
+          <th (click)="setOrder('country')" [class.active]="order==='country'">
+            <span [hidden]="reversa"><i class="bi bi-chevron-down"></i></span>
+            <span [hidden]="!reversa"><i class="bi bi-chevron-up"></i></span>
+            Country
+          </th>
+
+        </tr>
+      </thead>
+      <tbody *ngIf="listaChef">
+        <tr
+          *ngFor="let item of listaChef | filterBy: chefFilter  | paginate: { itemsPerPage: 10, currentPage: p } ">
+          <td>{{item.ranking}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.country}}</td>
+       
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+  </div>
+</section>
